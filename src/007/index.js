@@ -11,10 +11,10 @@ export function longestRunOfTwoNumbers(input) {
   //we search for our first second candidate
 
   for (; i < n; i++) {
-    console.log("_INPUT i", input[i]);
     firstCand.end++;
     if (input[i] != firstCand.value) {
       secondCand = { value: input[i], start: i, end: i + 1 };
+      //because we are breaking we have to increase the i manually
       i++;
       break;
     }
@@ -26,12 +26,20 @@ export function longestRunOfTwoNumbers(input) {
   // we continue with the iteration
   for (; i < n; i++) {
     //if it was a different value from our candidates, first we check if we change the max. Independent from the result, we reset the second candidate
+    if (input[i] != secondCand.value) {
+      secondCand.value = {};
+    }
 
     if (input[i] != firstCand.value && input[i] != secondCand.value) {
       const newOption = {
         start: firstCand.start,
         length: firstCand.end - firstCand.start,
       };
+      console.log("NEW OPTION", newOption);
+      console.log(
+        "NEW OPTION STRING",
+        input.slice(newOption.start, newOption.start + newOption.length)
+      );
 
       if (maxOption.length < newOption.length) {
         maxOption = newOption;
@@ -57,4 +65,4 @@ export function longestRunOfTwoNumbers(input) {
 
   return input.slice(maxOption.start, maxOption.start + maxOption.length);
 }
-console.log("ANS", longestRunOfTwoNumbers("3243"));
+console.log("ANS", longestRunOfTwoNumbers("1212223311212223"));
