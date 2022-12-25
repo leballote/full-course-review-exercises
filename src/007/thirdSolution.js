@@ -8,7 +8,7 @@ export function longestRunOfTwoNumbers(input) {
   let maxOption = { length: 0, start: 0 };
 
   for (let i = 1; i < input.length; i++) {
-    if (secondCand.value == null) {
+    if (secondCand.start == -1) {
       if (input[i] == firstCand.value) {
         firstCand.length++;
       } else {
@@ -18,7 +18,7 @@ export function longestRunOfTwoNumbers(input) {
     } else {
       if (input[i] == firstCand.value) {
         firstCand.length++;
-        secondCand = { value: null, start: -1, length: 0 };
+        secondCand = { value: secondCand.value, start: -1, length: 0 };
       } else if (input[i] == secondCand.value) {
         firstCand.length++;
         secondCand.length++;
