@@ -1,4 +1,4 @@
-import { flattenArray } from "../../src/009";
+import { flattenArray } from "../../dist/009";
 
 describe("edge cases", () => {
   test("primitive e.g. number", () => {

@@ -1,4 +1,4 @@
-import { longestRunOfTwoNumbers } from "../../src/007";
+import { longestRunOfTwoNumbers } from "../../dist/007";
 test("Example 1", () => {
   expect(longestRunOfTwoNumbers("1212223311212223")).toEqual("1121222");
 });

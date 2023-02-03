@@ -1,11 +1,3 @@
-import { createBinaryTreeNode as N } from "../utils/ds.utils";
-
-const tree1 = N(
-  25,
-  N(15, N(10, N(4), N(12)), N(22, N(18), N(24))),
-  N(50, N(35, N(31), N(44)), N(70, N(66), N(90)))
-);
-
 export default function printTree(tree, order = "infix", { onTraverse }) {
   if (order === "infix") {
     inOrderTraverse(tree, onTraverse);

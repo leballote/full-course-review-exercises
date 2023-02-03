@@ -1,4 +1,4 @@
-import { reverseBlocks } from "../../src/005";
+import { reverseBlocks } from "../../dist/005";
 
 describe("reverseBlocks should invert", () => {
   test("generic1", () => {

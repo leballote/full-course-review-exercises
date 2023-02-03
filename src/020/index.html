@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise 20</title>
+    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <main class="main-section">
+        <h1>Sierpiński triangle</h1>
+        <div id="serpinski-triangle-container"></div>
+      </main>
+      <section class="control-pannel drawer">
+        <h2>Options</h2>
+        <div class="serpinski-input-n">
+          <label for="serpinski-input-n-number">n</label>
+          <input
+            type="range"
+            class="serpinski-input-n-range"
+            min="1"
+            max="10"
+            name="n"
+          />
+          <div class="input-number-container">
+            <input
+              type="number"
+              id="serpinski-input-n-number"
+              class="serpinski-input-n-number"
+              min="0"
+              max="10"
+              placeholder="1"
+              name="n"
+            />
+            <button id="serpinski-draw-button">Draw!</button>
+          </div>
+        </div>
+        <div class="input-color-container">
+          <label for="serpinski-input-color">Color</label>
+          <input
+            type="color"
+            name="color"
+            id="serpinski-input-color"
+            class="serpinski-input-color"
+          />
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+:root {
+  box-sizing: border-box;
+  /* font-family: Arial, Helvetica, sans-serif; */
+  /* font-size: 1.2em; */
+  --color-text-1: black;
+  --color-text-2: #40c5c5;
+  --color-text-3: #868383;
+  --color-text-background-2: #ebf7f5;
+  --base-size: 1rem;
+  --type-scale: 1.25;
+
+  --fs-1: calc(var(--fs-2) / var(--type-scale));
+  --fs-2: calc(var(--fs-3) / var(--type-scale));
+  --fs-3: calc(var(--fs-4) / var(--type-scale));
+  --fs-4: var(--base-size);
+  --fs-5: calc(var(--type-scale) * var(--fs-4));
+  --fs-6: calc(var(--type-scale) * var(--fs-5));
+  --fs-7: calc(var(--type-scale) * var(--fs-6));
+  --fs-8: calc(var(--type-scale) * var(--fs-7));
+  --fs-9: calc(var(--type-scale) * var(--fs-8));
+
+  --m-1: calc(var(--m-2) / var(--type-scale));
+  --m-2: calc(var(--m-3) / var(--type-scale));
+  --m-3: calc(var(--m-4) / var(--type-scale));
+  --m-4: var(--base-size);
+  --m-5: calc(var(--type-scale) * var(--m-4));
+  --m-6: calc(var(--type-scale) * var(--m-5));
+  --m-7: calc(var(--type-scale) * var(--m-6));
+  --m-8: calc(var(--type-scale) * var(--m-7));
+  --m-9: calc(var(--type-scale) * var(--m-8));
+
+  color: var(--color-text-1);
+  --font-2: Brush Script MT, Brush Script Std, cursive;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+p {
+  font-size: var(--fs-4);
+}
+
+h4 {
+  font-size: var(--fs-5);
+}
+
+h3 {
+  font-size: var(--fs-6);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: var(--color-text-2);
+}
+
+a:where(:visited, :link, :focus) {
+  text-decoration: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}

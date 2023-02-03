@@ -1,68 +1,50 @@
-export function longestRunOfTwoNumbers(input) {
-  if (input.length == 0) return "";
+function findMaxOption(maxOption, firstCand) {
+  const newOption = { start: firstCand.start, length: firstCand.length };
+  if (newOption.length > maxOption.length) {
+    return newOption;
+  }
+  return maxOption;
+}
 
-  let n = input.length;
-  let firstCand = { value: input[0], start: 0, end: 1 };
-  let secondCand = { value: null, start: null, end: null };
-  let maxOption = { start: 0, length: 1 };
+export function longestRunOfTwoNumbers(input) {
+  if (typeof input != "string" || input.length <= 0) return "";
+
+  const n = input.length;
+  //we track a first candidate and a second candidate. Only the first candidate can maximize the length
+  //but we will need to remember the second candidate to make it the first candidate at some point
+  let firstCand = { value: input[0], start: 0, length: 1, secondValue: null };
+  let secondCand = null;
+  let maxOption = { start: 0, length: 0 };
 
   let i = 1;
-
-  //we search for our first second candidate
-
   for (; i < n; i++) {
-    firstCand.end++;
+    firstCand.length++;
     if (input[i] != firstCand.value) {
-      secondCand = { value: input[i], start: i, end: i + 1 };
-      //because we are breaking we have to increase the i manually
+      secondCand = { value: input[i], start: i, length: 1, secondValue: null };
+      firstCand.secondValue = input[i];
       i++;
       break;
     }
   }
+  if (!secondCand) return input;
 
-  //if we don't find it it means it was only one character in all the string, and we return it
-  if (secondCand.value == null) return input;
-
-  // we continue with the iteration
   for (; i < n; i++) {
-    //if it was a different value from our candidates, first we check if we change the max. Independent from the result, we reset the second candidate
-    if (input[i] != secondCand.value) {
-      secondCand.value = {};
-    }
-
-    if (input[i] != firstCand.value && input[i] != secondCand.value) {
-      const newOption = {
-        start: firstCand.start,
-        length: firstCand.end - firstCand.start,
-      };
-      console.log("NEW OPTION", newOption);
-      console.log(
-        "NEW OPTION STRING",
-        input.slice(newOption.start, newOption.start + newOption.length)
-      );
-
-      if (maxOption.length < newOption.length) {
-        maxOption = newOption;
-      }
-
-      firstCand = secondCand;
-      secondCand = { value: input[i], start: i, end: i + 1 };
+    if (input[i] == firstCand.value || input[i] == firstCand.secondValue) {
+      firstCand.length++;
+      secondCand.length++;
     } else {
-      firstCand.end++;
-      secondCand.end++;
+      maxOption = findMaxOption(maxOption, firstCand);
+      secondCand.length++;
+      firstCand = secondCand;
+      firstCand.secondValue = input[i];
+    }
+
+    if (input[i] != secondCand.value) {
+      secondCand = { value: input[i], start: i, length: 1 };
     }
   }
 
-  //
-  const newOption = {
-    start: firstCand.start,
-    length: firstCand.end - firstCand.start,
-  };
-
-  if (maxOption.length < newOption.length) {
-    maxOption = newOption;
-  }
+  maxOption = findMaxOption(maxOption, firstCand);
 
   return input.slice(maxOption.start, maxOption.start + maxOption.length);
 }
-console.log("ANS", longestRunOfTwoNumbers("1212223311212223"));

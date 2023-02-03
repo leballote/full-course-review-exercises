@@ -1,0 +1,77 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+form {
+  margin: 4em;
+  display: flex;
+  flex-flow: row wrap;
+  min-width: 20em;
+  max-width: 30em;
+  position: relative;
+  justify-content: center;
+}
+
+form > label {
+  flex: 0 0 auto;
+  /* min-width: 50%; */
+}
+
+.form-field {
+  flex: 1 1 auto;
+  /* filter: drop-shadow(-1px 6px 3px red); */
+}
+
+input {
+  display: block;
+  width: 100%;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 2px solid black;
+  height: 100%;
+  font-size: 1rem;
+}
+
+[data-hint]::before {
+  content: "";
+  width: 0.6rem;
+  height: 0.6rem;
+  position: absolute;
+  font-size: 0.6rem;
+  top: calc(-32px + 14px);
+  left: 160px;
+  background-color: black;
+  box-shadow: 2px 1px 5px 0.2px rgba(0, 0, 0, 0.75);
+  /* clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 21% 73%, 15% 99%, 9% 74%, 0 73%); */
+  transform: rotate(45deg);
+}
+
+[data-hint]::after {
+  content: attr(data-hint);
+  position: absolute;
+  top: -32px;
+  font-size: 0.6rem;
+  background-color: rgba(0, 0, 0, 1);
+  box-shadow: 2px 1px 5px 0.2px rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 0.3em;
+}
+/* padding-bottom: 1em; */
+/* clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 21% 73%, 15% 99%, 9% 74%, 0 73%); */
+
+form > button {
+  width: 100%;
+  /* flex-basis: 100%; */
+  flex-grow: 0;
+  margin: 1em 10em;
+  min-width: max-content;
+  width: max-content;
+  background-color: #ff6348;
+  color: white;
+  padding: 0.8em 2em;
+  border-radius: 30px;
+  border: none;
+  font-weight: bold;
+}

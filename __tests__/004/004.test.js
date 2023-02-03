@@ -1,4 +1,4 @@
-import { mergeArrays } from "../../src/004";
+import { mergeArrays } from "../../dist/004";
 
 describe("mergeArray should merge", () => {
   test("generic 1", () => {

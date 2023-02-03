@@ -1,4 +1,4 @@
-import { iterativeFlattenArray } from "../../src/009";
+import { iterativeFlattenArray } from "../../dist/009";
 
 describe("edge cases", () => {
   test("primitive e.g. number", () => {

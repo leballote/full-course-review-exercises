@@ -1,4 +1,4 @@
-import { flatten } from "../../src/008";
+import { flatten } from "../../dist/008";
 describe("For not pure objects it should return them", () => {
   test("null", () => {
     expect(flatten(null)).toEqual(null);
