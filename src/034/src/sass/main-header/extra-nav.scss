@@ -1,0 +1,30 @@
+@use "../breakpoints" as bp;
+
+.extra-nav {
+    display: none;
+
+    @media (min-width: bp.$large) {
+        display: flex;
+        flex-direction: column;
+        gap: var(--m-6);
+    }
+}
+
+.extra-nav__post__title {
+    font-size: var(--fs-4);
+    text-transform: uppercase;
+    border-bottom: 2px dashed var(--color-text-1);
+    padding: var(--m-1) 0;
+}
+
+.extra-nav__post__body {
+    padding: var(--m-2) 0;
+    font-size: var(--fs-4);
+}
+
+.extra-nav__post__action {
+    font-size: var(--fs-4);
+    border: 1px solid #777;
+    padding: var(--m-1);
+    border-radius: 5px;
+}

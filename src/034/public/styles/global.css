@@ -8,7 +8,6 @@
   --color-text-background-2: #ebf7f5;
   --base-size: 1rem;
   --type-scale: 1.25;
-
   --fs-1: calc(var(--fs-2) / var(--type-scale));
   --fs-2: calc(var(--fs-3) / var(--type-scale));
   --fs-3: calc(var(--fs-4) / var(--type-scale));
@@ -18,7 +17,6 @@
   --fs-7: calc(var(--type-scale) * var(--fs-6));
   --fs-8: calc(var(--type-scale) * var(--fs-7));
   --fs-9: calc(var(--type-scale) * var(--fs-8));
-
   --m-1: calc(var(--m-2) / var(--type-scale));
   --m-2: calc(var(--m-3) / var(--type-scale));
   --m-3: calc(var(--m-4) / var(--type-scale));
@@ -28,9 +26,9 @@
   --m-7: calc(var(--type-scale) * var(--m-6));
   --m-8: calc(var(--type-scale) * var(--m-7));
   --m-9: calc(var(--type-scale) * var(--m-8));
-
   color: var(--color-text-1);
   --font-2: Brush Script MT, Brush Script Std, cursive;
+  --d: solid 2px red !important;
 }
 
 *,
@@ -67,3 +65,5 @@ a:where(:visited, :link, :focus) {
   margin: 0;
   padding: 0;
 }
+
+/*# sourceMappingURL=global.css.map */

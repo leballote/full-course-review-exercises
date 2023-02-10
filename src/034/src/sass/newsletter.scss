@@ -1,14 +1,23 @@
+@use "global";
+@use "breakpoints" as bp;
+
 .newsletter {
   display: flex;
   flex-flow: row wrap;
   padding: var(--m-1) var(--m-4);
   gap: var(--m-1) var(--m-6);
+  @media (min-width: bp.$medium) {
+    border-top: dashed 2px var(--color-text-1);
+  }
 }
 
 .newsletter__main {
   display: flex;
   gap: var(--m-8);
   align-items: center;
+  @media (min-width: bp.$medium) {
+    flex: 1;
+  }
 }
 
 .newsletter__input-container {
@@ -17,6 +26,9 @@
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
+  @media (min-width: bp.$medium) {
+    flex: 1;
+  }
 }
 
 /* inside main */

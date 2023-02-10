@@ -1,0 +1,21 @@
+{
+  "name": "034",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "sass src/sass:public/styles",
+    "compile:watch": "sass --watch src/sass:public/styles",
+    "start": "live-server public",
+    "dev": "concurrently \"npm run compile:watch\" \"live-server public\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "alive-server": "^1.2.9",
+    "concurrently": "^7.6.0",
+    "live-server": "^1.2.2",
+    "sass": "^1.58.0"
+  }
+}

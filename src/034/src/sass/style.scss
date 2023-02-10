@@ -1,0 +1,57 @@
+@use "global";
+@use "newsletter";
+@use "main-header/main-header";
+@use "hero";
+@use "footer";
+@use "articles";
+
+body {
+  min-width: 300px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.cursive {
+  font-family: var(--font-2);
+}
+
+/* Overall */
+.upper-section,
+.top-nav,
+.hero,
+.newsletter,
+.article-preview {
+  border-bottom: dashed 2px var(--color-text-1);
+}
+
+.brand-icon {
+  color: var(--color-text-3);
+  font-size: var(--fs-6);
+}
+
+.accented-text {
+  color: var(--color-text-2);
+}
+
+@media (min-width: 40em) {
+
+  .top-nav,
+  .hero,
+  .article-preview {
+    border-bottom: none;
+  }
+}
+
+@media (min-width: 60em) {
+  .upper-section {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  .content {
+    flex: 1;
+  }
+}

@@ -1,0 +1,21 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-text-3);
+  padding: var(--m-4) var(--m-1);
+}
+
+.footer__section-links {
+  display: flex;
+  gap: var(--m-2);
+}
+
+.footer__section-links__item:not(:last-child)::after {
+  content: "|";
+}
+
+.footer__brand__section .brand-icon {
+  font-size: var(--fs-7);
+}
+
+/*# sourceMappingURL=footer.css.map */
