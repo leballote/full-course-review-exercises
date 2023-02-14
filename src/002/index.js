@@ -1,60 +1,42 @@
-//TODO: test it
-const urlQuery = (url) => () => fetch(url);
-
-const maxRetry = 3;
-const useIncrement = true;
-const delay = 1000;
-
 /**
  * perform query successfully once or try up to a maximum of maxRetry times
  * if unsuccessful, delay the next attempt for an amount of time. If attempts
  * continue to fail then increase the delay between attempts if useIncrements
  * is set to true.
  */
-queryRetry(urlQuery("some/url"), maxRetry, delay, useIncrement)
-  .then(handleSuccess)
-  .catch(handleErrorOrMaxRetryExceeded);
-
-// function queryRetry(query, maxRetry = 0, delay = 10000, useIncrement = false) {
-//   let res;
-//   let tryNo = 0;
-//   while (tryNo <= maxRetry) {
-//     query();
-//   }
-//   return res;
-// }
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function queryRetry(
+export async function queryRetry(
   query,
   maxRetry = 0,
-  delay = 10000,
-  useIncrement = false
+  delay = 1000,
+  useIncrement = false,
+  sleepFn = sleep
 ) {
   let res;
   let tryNo = 0;
 
-  while (tryNo < maxRetry) {
-    try {
-      res = await query();
+  while (tryNo < maxRetry + 1) {
+    res = await query("yei");
+    if (res.ok) {
       return res;
-    } catch (e) {
-      await sleep(delay);
-      if (useIncrement) {
-        delay = delay * delay;
-      }
     }
+    await sleepFn(delay);
+    if (useIncrement) {
+      delay += delay;
+    }
+    tryNo++;
   }
-  throw new Error("Max retry exeeded");
+  const finalError = new MaxRetryExceededError("Max retry exceeded");
+  finalError.fetchResponse = res;
+  throw finalError;
 }
 
-function handleSuccess(data) {
-  console.log(data);
-}
-
-function handleErrorOrMaxRetryExceeded(data) {
-  console.log(data);
+export class MaxRetryExceededError extends Error {
+  constructor(...args) {
+    super("Max retry exceeded", ...args);
+  }
 }
