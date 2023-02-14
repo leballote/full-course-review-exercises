@@ -36,7 +36,7 @@ describe("timers", () => {
     expect(query).toBeCalledTimes(4);
   });
 
-  test.skip("without useIncrement", async () => {
+  test("without useIncrement", async () => {
     const urlQuery = (url) => jest.fn(() => fetch(url));
     const query = urlQuery("https://example.com");
     fetchMock.mockResponses(
@@ -45,8 +45,15 @@ describe("timers", () => {
       [JSON.stringify("failed"), { status: 404 }],
       [JSON.stringify("ok"), { status: 200 }]
     );
-    queryRetry(query, 2, 300, true);
-    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 1000);
-    expect(query).toHaveBeenCalledTimes(1);
+    const delay = 300;
+    expect(query).not.toBeCalled();
+    queryRetry(query, 3, delay, false);
+    expect(query).toBeCalledTimes(1);
+    await clock.tickAsync(delay);
+    expect(query).toBeCalledTimes(2);
+    await clock.tickAsync(delay);
+    expect(query).toBeCalledTimes(3);
+    await clock.tickAsync(delay);
+    expect(query).toBeCalledTimes(4);
   });
 });
