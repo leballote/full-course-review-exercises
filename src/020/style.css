@@ -21,16 +21,15 @@
 .triangle {
   position: absolute;
   --side-size: 50px;
-  --diag-size:  86.60254px ;
-	width: 0;
-	height: 0;
-	border-right: var(--side-size) solid  transparent;
-	border-left: var(--side-size) solid  transparent;
-
+  --diag-size: 86.60254px;
+  width: 0;
+  height: 0;
+  border-right: var(--side-size) solid transparent;
+  border-left: var(--side-size) solid transparent;
 }
 
 .up-triangle {
-	border-bottom: var(--diag-size) solid;
+  border-bottom: var(--diag-size) solid;
 }
 
 .container {
@@ -54,7 +53,6 @@
 .drawer > *:not(:first-child) {
   margin: 2em 0;
 }
-
 
 .serpinski-input-color {
   display: block;
