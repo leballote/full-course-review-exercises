@@ -9,10 +9,10 @@
 }
 
 #serpinski-triangle-container {
-  --m: 1;
   position: relative;
-  width: 100%;
-  aspect-ratio: calc(1 / 0.866025);
+  width: 500px;
+  height: 500px;
+  /* margin: 10em; */
 }
 
 * {
@@ -21,14 +21,17 @@
 }
 
 .triangle {
-  position: absolute;
-  width: calc(100% / var(--m));
-  height: calc(100% / var(--m));
-  background-color: black;
+  /* position: absolute; */
+  --side-size: 50px;
+  --diag-size: 86.60254px;
+  width: 0;
+  height: 0;
+  border-right: var(--side-size) solid transparent;
+  border-left: var(--side-size) solid transparent;
 }
 
 .up-triangle {
-  clip-path: polygon(50% 0, 0 100%, 100% 100%);
+  border-bottom: var(--diag-size) solid;
 }
 
 .container {
