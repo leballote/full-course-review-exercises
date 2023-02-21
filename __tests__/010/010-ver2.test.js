@@ -24,13 +24,9 @@ describe("Should throw parsing error", () => {
     expect(() => printTree(treeString)).toThrow(ParsingError);
   });
 
-  test("This shouldn't throw wut?", () => {
-    const treeString = "(A,(H))";
-    printTree(treeString, "infix", {
-      onTraverse: (val) => {
-        console.log("TRACKING:", val);
-      },
-    });
+  test("Not binary tree", () => {
+    const treeString = "(A,(B),(C),(D))";
+    expect(() => printTree(treeString)).toThrow(ParsingError);
   });
 });
 
@@ -102,6 +98,35 @@ describe("Not erroring", () => {
           ["G"],
           ["J"],
         ]);
+      });
+
+      test("Simple tree", () => {
+        const treeString = "(A,(B),(C))";
+        printTree(treeString, "prefix");
+        expect(consoleSpy.mock.calls).toEqual([["A"], ["B"], ["C"]]);
+      });
+      test("Tree with null right node explicit", () => {
+        const treeString = "(A,(B),)";
+        printTree(treeString, "prefix");
+        expect(consoleSpy.mock.calls).toEqual([["A"], ["B"]]);
+      });
+
+      test("Tree with null right node implicit", () => {
+        const treeString = "(A,(B))";
+        printTree(treeString, "prefix");
+        expect(consoleSpy.mock.calls).toEqual([["A"], ["B"]]);
+      });
+
+      test("tree with null left node", () => {
+        const treeString = "(A,,(C))";
+        printTree(treeString, "prefix");
+        expect(consoleSpy.mock.calls).toEqual([["A"], ["C"]]);
+      });
+
+      test("tree with both children null", () => {
+        const treeString = "(A,,)";
+        printTree(treeString, "prefix");
+        expect(consoleSpy.mock.calls).toEqual([["A"]]);
       });
     });
 
