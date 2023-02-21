@@ -1,6 +1,6 @@
 (function (global) {
   let root = document.getElementById("results");
-  //this is one  way to achieve it. I think, it would be better to change the assert function but don't know if that is an option
+  //this is one way to achieve it. I think, it would be better to change the assert function to accept root as a parameter but don't know if that is an option
   const originalSetTimeout = setTimeout;
   setTimeout = function (fn, ...rest) {
     let temp = root;

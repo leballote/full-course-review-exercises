@@ -1,5 +1,5 @@
 export function mergeArrays(largeArray, smallArray) {
-  if (largeArray.length < smallArray) {
+  if (largeArray.length < smallArray.length) {
     return mergeArrays(smallArray, largeArray);
   }
   let k = largeArray.length - 1;

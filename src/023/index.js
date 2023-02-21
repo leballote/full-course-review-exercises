@@ -2,7 +2,17 @@
 import { SingleBar } from "cli-progress";
 import colors from "ansi-colors";
 
-function findFirstNPrimes(N, callback) {
+export function createBar() {
+  return new SingleBar({
+    format: formatter, //`${" {bar}"} " {percentage}% | ETA: {eta}s | {value}/{total}"`,
+    barsize: 40,
+    barCompleteChar: "=", // cyan
+    barIncompleteChar: "-",
+  });
+}
+
+export function findFirstNPrimes(N, callback) {
+  if (N < 1) return [];
   const primes = [];
   let current = 1;
   outer: while (primes.length != N) {
@@ -45,12 +55,7 @@ function formatter(options, params, payload) {
 }
 
 function findFirstNPrimesLoadingBar(N) {
-  const bar = new SingleBar({
-    format: formatter, //`${" {bar}"} " {percentage}% | ETA: {eta}s | {value}/{total}"`,
-    barsize: 40,
-    barCompleteChar: "=", // cyan
-    barIncompleteChar: "-",
-  });
+  const bar = createBar();
   bar.start(N, 0);
   const primes = findFirstNPrimes(N, (_, primes) => {
     bar.update(primes.length);

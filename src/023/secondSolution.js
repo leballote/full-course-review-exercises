@@ -1,3 +1,5 @@
+import { clearLine, cursorTo } from "readline";
+
 const loadingBar = (percent) => {
   const total = 10;
   const filled = Math.floor(percent / 10);
@@ -18,7 +20,7 @@ const loadingBar = (percent) => {
 let i = 0;
 setInterval(() => {
   i = (i + 1) % 101;
-  process.stdout.clearLine(); // clear the current line
-  process.stdout.cursorTo(0); // move the cursor to the start of the line
-  process.stdout.write(loadingBar(i)); // write the updated loading bar
+  // clearLine();
+  cursorTo(process.stdout, 0);
+  process.stdout.write(loadingBar(i));
 }, 100);

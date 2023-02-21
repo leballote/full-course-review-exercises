@@ -150,5 +150,7 @@ async function drawAndMountSerpinskiTriangle(
     root,
   });
 
-  serpinskiTriangleContainer.replaceChildren(root);
+  requestAnimationFrame(() => {
+    serpinskiTriangleContainer.replaceChildren(root);
+  });
 }
