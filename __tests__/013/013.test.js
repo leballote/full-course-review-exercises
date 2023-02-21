@@ -9,6 +9,8 @@ const root = N(0, [
   N(7, [N(3, [N(3), N(0, [N(9), N(4)])])]),
 ]);
 
+const root2 = N(3, [N(1), N(1), N(2)]);
+
 describe("Same level", () => {
   test("Only two levels", () => {
     const tree = N(4, [N(2), N(2)]);
@@ -27,6 +29,11 @@ describe("Same level", () => {
 
   test("From right to left generic", () => {
     const ans = isSameLevel(root, 5, 3);
+    expect(ans).toEqual(true);
+  });
+
+  test("Another generic example", () => {
+    const ans = isSameLevel(root2, 1, 2);
     expect(ans).toEqual(true);
   });
 });

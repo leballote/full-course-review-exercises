@@ -18,33 +18,33 @@ export function isSameLevel(tree, value1, value2) {
   }
   const treeWithLevel = new NodeWithLevel(tree, 0);
   const queue = [treeWithLevel];
-  let oldElement = null;
-  let element = null;
+  let prevElement = null;
+  let currElement = null;
   while (queue.length > 0) {
-    oldElement = element;
-    element = queue.shift();
-    if (oldElement?.level != element?.level) {
+    prevElement = currElement;
+    currElement = queue.shift();
+    if (prevElement?.level != currElement?.level) {
       countValues.value1 = 0;
       countValues.value2 = 0;
     }
-    if (value1 === element.node.value) {
+    if (value1 === currElement.node.value) {
       countValues.value1++;
     }
-    if (value2 === element.node.value) {
+    if (value2 === currElement.node.value) {
       countValues.value2++;
     }
-    if (value1 === value2 && countValues.value1 == 2) {
+    if (value1 === value2 && countValues.value1 >= 2) {
       return true;
     }
     if (
       value1 != value2 &&
-      countValues.value1 == 1 &&
-      countValues.value2 == 1
+      countValues.value1 >= 1 &&
+      countValues.value2 >= 1
     ) {
       return true;
     }
-    for (const child of element.node.children) {
-      queue.push(new NodeWithLevel(child, element.level + 1));
+    for (const child of currElement.node.children) {
+      queue.push(new NodeWithLevel(child, currElement.level + 1));
     }
   }
   return false;
