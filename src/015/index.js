@@ -1,13 +1,19 @@
 export function findBalanceIndex(array) {
-  const sum = array.reduce((tot, x) => tot + x, 0);
-  const half = sum / 2;
-  let currentSum = 0;
-  for (let i = 0; i < array.length; i++) {
-    const element = array[i];
-    currentSum += element;
-    if (currentSum === half) {
-      return i;
+  let i = 0;
+  let j = array.length - 1;
+  let leftSum = 0;
+  let rightSum = 0;
+  while (i <= j) {
+    if (leftSum < rightSum) {
+      leftSum += array[i];
+      i++;
+    } else {
+      rightSum += array[j];
+      j--;
     }
+  }
+  if (leftSum === rightSum) {
+    return j;
   }
   return -1;
 }

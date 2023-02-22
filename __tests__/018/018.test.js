@@ -1,4 +1,4 @@
-import { set } from "../../dist/018";
+import { NotAssignableError, set } from "../../dist/018";
 
 describe("Can insert", () => {
   test("In empty object", () => {
@@ -19,7 +19,7 @@ describe("Can insert", () => {
     expect(toEval).toBe(obj);
   });
 
-  test("Properties already assigned in the way", () => {
+  test("It should not create new objects in the path if they are already there", () => {
     const obj = {
       foo: 1,
       path: {
@@ -45,7 +45,7 @@ describe("Can insert", () => {
     expect(toEval).toEqual(ans);
     expect(toEval).toBe(obj);
   });
-  test("Should overwrite if already set", () => {
+  test("Should overwrite value at the end", () => {
     const obj = {
       foo: 1,
       path: {
@@ -86,16 +86,25 @@ describe("Can insert", () => {
       bar: 2,
     };
     const ans = {
-      a: {
-        b: {
-          c: prop,
+      a: 7,
+      x: {
+        y: {
+          z: prop,
         },
       },
     };
-    const toEval = set(obj, "a.b.c", prop);
+    const toEval = set(obj, "x.y.z", prop);
     expect(toEval).toEqual(ans);
     expect(toEval).toBe(obj);
-    expect(toEval.a.b.c).toBe(prop);
+    expect(toEval.x.y.z).toBe(prop);
+  });
+
+  test("Can insert in functions", () => {
+    const obj = {
+      a: () => {},
+    };
+    set(obj, "a.b.c", 10);
+    expect(obj.a.b.c).toEqual(10);
   });
 });
 
@@ -103,5 +112,12 @@ describe("Can't insert", () => {
   test("null Object", () => {
     const thunk = () => set(null, "path.to.deeply.nested.property");
     expect(thunk).toThrow(Error);
+  });
+
+  test("It shouldn't overwrite values along the path", () => {
+    const obj = {
+      a: 7,
+    };
+    expect(() => set(obj, "a.b.c", 9)).toThrow(NotAssignableError);
   });
 });

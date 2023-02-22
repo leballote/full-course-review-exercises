@@ -21,3 +21,21 @@ function isArrayPalindrome(array) {
   }
   return true;
 }
+
+import {
+  connectNodesSequentially,
+  createLinkedListNode as N,
+} from "../../src/utils/ds.utils";
+
+const list = connectNodesSequentially([
+  N("a"),
+  N("b"),
+  N("c"),
+  N("d"),
+  N("c"),
+  N("b"),
+  N("a"),
+]);
+
+const ans = fromLinkedListToArray(list);
+console.log("ans", ans);

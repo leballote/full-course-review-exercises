@@ -1,22 +1,29 @@
 export function set(obj, path, value) {
-  if (obj == null) {
-    const message = `Cannot set properties of null (setting '${path}')`;
-    throw new TypeError(message);
-  }
   const pathList = path.split(".");
   let current = obj;
   for (let i = 0; i < pathList.length; i++) {
-    const segment = pathList[i];
-    if (
-      (typeof current[segment] != "object" || current[segment] === null) &&
-      i != pathList.length - 1
-    ) {
-      current[segment] = {};
+    const prop = pathList[i];
+    if (!isPropertyAssignable(current)) {
+      throw new NotAssignableError();
     }
+    if (current[prop] === undefined) {
+      current[prop] = {};
+    }
+
     if (i == pathList.length - 1) {
-      current[segment] = value;
+      current[prop] = value;
     }
-    current = current[segment];
+    current = current[prop];
   }
   return obj;
+}
+
+function isPropertyAssignable(obj) {
+  return (typeof obj === "object" || typeof obj === "function") && obj != null;
+}
+
+export class NotAssignableError extends Error {
+  constructor(...args) {
+    super(...args);
+  }
 }

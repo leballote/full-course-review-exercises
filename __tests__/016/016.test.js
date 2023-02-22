@@ -50,6 +50,26 @@ describe("Cicle", () => {
     ]);
     expect(findLoopStart(head)).toEqual(cicleStart);
   });
+
+  test("Longer start than cicle", () => {
+    const cicleStart = N(1);
+    const head = connectNodesSequentially([
+      N(2),
+      N(2),
+      N(3),
+      N(3),
+      N(4),
+      N(5),
+      N(6),
+      N(6),
+      cicleStart,
+      N(7),
+      N(2),
+      N(1),
+      cicleStart,
+    ]);
+    expect(findLoopStart(head)).toEqual(cicleStart);
+  });
 });
 
 describe("Doesn't cicle", () => {

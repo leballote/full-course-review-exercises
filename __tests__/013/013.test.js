@@ -32,7 +32,7 @@ describe("Same level", () => {
     expect(ans).toEqual(true);
   });
 
-  test("Another generic example", () => {
+  test("Multiple nodes with the same value in the same level", () => {
     const ans = isSameLevel(root2, 1, 2);
     expect(ans).toEqual(true);
   });
