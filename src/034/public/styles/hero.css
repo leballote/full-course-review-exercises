@@ -70,11 +70,13 @@
     padding: var(--m-1) var(--m-5);
     font-size: var(--fs-6);
     width: fit-content;
+    background-color: white;
   }
   .hero__text__secondary {
     width: fit-content;
     padding: var(--m-1) var(--m-5);
     font-size: var(--fs-5);
+    background-color: black;
   }
 }
 @media (min-width: 60em) {
