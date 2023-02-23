@@ -34,6 +34,11 @@ input {
   font-size: 1rem;
 }
 
+input:focus,
+input:focus-visible {
+  outline: none;
+}
+
 [data-hint]::before {
   content: "";
   width: 0.6rem;
