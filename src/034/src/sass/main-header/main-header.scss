@@ -9,16 +9,36 @@
 }
 
 .main-header__image-container {
+    --image-size: 100px;
     display: flex;
     justify-content: center;
-    flex: 100%;
+    // flex: 100%;
     padding: var(--m-10);
     margin: var(--m-4);
 }
 
+.main-header__container {
+    width: fit-content;
+    position: relative;
+}
+
+.main-header__title {
+    position: absolute;
+    width: var(--image-size);
+    padding: var(--m-2);
+    text-align: center;
+    font-family: var(--font-2);
+    color: white;
+    font-size: var(--fs-5);
+    text-shadow: 1px 1px 10px black;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .main-header__image {
-    width: 100px;
-    height: 100px;
+    width: var(--image-size);
+    height: var(--image-size);
     border-radius: 50%;
 }
 

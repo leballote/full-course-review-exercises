@@ -22,10 +22,26 @@
 }
 
 .extra-nav__post__action {
+  display: flex;
+  gap: var(--m-2);
+  width: fit-content;
   font-size: var(--fs-4);
   border: 1px solid #777;
   padding: var(--m-1);
   border-radius: 5px;
+  align-items: center;
+}
+
+.extra-nav__action__icon {
+  width: 1.5em;
+  height: 1.5em;
+  fill: var(--color-text-2);
+}
+
+.extra-nav__action__icon__inn {
+  width: 1.5em;
+  height: 1.5em;
+  fill: var(--color-text-2);
 }
 
 /*# sourceMappingURL=extra-nav.css.map */

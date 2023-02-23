@@ -25,6 +25,7 @@
         padding: 0;
     }
 
+
     .top-nav__menu {
         justify-content: flex-end;
         gap: var(--m-2);
@@ -36,7 +37,7 @@
     }
 
     .top-nav__menu-item__icon {
-        font-size: 1.3em;
+        width: 1.5em;
         display: block;
     }
 }
@@ -56,7 +57,7 @@
     }
 
     .top-nav__menu-item__icon {
-        width: 26px;
+        width: 1.3em;
     }
 
     .top-nav__menu-item {

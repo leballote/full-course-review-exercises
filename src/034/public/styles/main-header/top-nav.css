@@ -31,7 +31,7 @@
     flex-flow: column wrap;
   }
   .top-nav__menu-item__icon {
-    font-size: 1.3em;
+    width: 1.5em;
     display: block;
   }
 }
@@ -47,7 +47,7 @@
     align-items: flex-start;
   }
   .top-nav__menu-item__icon {
-    width: 26px;
+    width: 1.3em;
   }
   .top-nav__menu-item {
     flex-direction: row;

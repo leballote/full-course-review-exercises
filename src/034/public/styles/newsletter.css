@@ -5,6 +5,7 @@
   --color-text-1: black;
   --color-text-2: #40c5c5;
   --color-text-3: #868383;
+  --svg-filter-color-text-2: invert(68%) sepia(7%) saturate(3158%) hue-rotate(131deg) brightness(99%) contrast(88%);
   --color-text-background-2: #ebf7f5;
   --base-size: 1rem;
   --type-scale: 1.25;
@@ -69,19 +70,22 @@ a:where(:visited, :link, :focus) {
 .newsletter {
   display: flex;
   flex-flow: row wrap;
-  padding: var(--m-1) var(--m-4);
-  gap: var(--m-1) var(--m-6);
+  padding: var(--m-1) var(--m-1);
+  gap: var(--m-1) var(--m-1);
 }
 @media (min-width: 40em) {
   .newsletter {
+    padding: var(--m-1) var(--m-4);
+    gap: var(--m-1) var(--m-6);
     border-top: dashed 2px var(--color-text-1);
   }
 }
 
 .newsletter__main {
   display: flex;
-  gap: var(--m-8);
   align-items: center;
+  justify-content: space-between;
+  gap: var(--m-2);
 }
 @media (min-width: 40em) {
   .newsletter__main {
@@ -104,8 +108,7 @@ a:where(:visited, :link, :focus) {
 
 /* inside main */
 .newsletter__icon {
-  font-size: 50px;
-  padding: var(--m-2);
+  width: min(130px + 12vw, 180px);
 }
 
 .newsletter__caption {
