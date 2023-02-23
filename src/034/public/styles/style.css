@@ -356,6 +356,10 @@ a:where(:visited, :link, :focus) {
   text-align: center;
 }
 
+.hero__menu-item:not(:last-child) {
+  border-right: var(--color-text-2) 2px solid;
+}
+
 .hero__menu-item__link {
   display: block;
   padding: var(--m-3) var(--m-2);
