@@ -1,4 +1,4 @@
-import { createBar } from "../../src/023";
+import { createBar } from "../../src/023/app.mjs";
 import { execSync } from "child_process";
 
 describe("Tests for the loading bar", () => {
