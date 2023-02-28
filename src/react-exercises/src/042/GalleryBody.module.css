@@ -1,0 +1,5 @@
+.gallery-body {
+  height: 600px;
+  overflow-y: auto;
+  background-color: red;
+}
