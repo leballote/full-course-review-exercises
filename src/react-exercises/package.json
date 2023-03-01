@@ -12,6 +12,9 @@
   },
   "dependencies": {
     "@cubejs-client/core": "^0.31.46",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/material": "^5.11.11",
     "@reduxjs/toolkit": "^1.9.2",
     "chart.js": "^4.2.0",
     "d3": "^7.8.2",

@@ -9,8 +9,6 @@ import React, {
 import GalleryBody from "./GalleryBody";
 import PageButton from "./PageButton";
 import PageNavBar from "./PageNavBar";
-import "./Gallery.module.css";
-import styles from "./Gallery.module.css";
 import isAtBottom from "./isAtBottom";
 
 //todo unify the types
@@ -59,11 +57,8 @@ export default function Gallery({
     pageParam,
     countParam,
     setPageParam,
-    setPage,
     pageIndex,
-    setCountParam,
     nextPageData,
-    setNextPageData,
     fetchNextPage,
   } = hookRes;
   // const [temp, setTemp] = use
@@ -100,7 +95,7 @@ export default function Gallery({
   }
 
   return (
-    <div className={styles.gallery} ref={ref}>
+    <div ref={ref}>
       <PageNavBar
         pageIndex={pageIndex}
         onGoPageClick={(_, pageNum) => {

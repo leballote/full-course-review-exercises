@@ -1,3 +1,5 @@
+import { Button } from "@mui/material";
+
 type Props = {
   pageNum: number;
   onGoPageClick?: (
@@ -8,12 +10,13 @@ type Props = {
 
 export default function PageButton({ pageNum, onGoPageClick }: Props) {
   return (
-    <button
+    <Button
+      size="small"
       onClick={(ev) => {
         onGoPageClick && onGoPageClick(ev, pageNum);
       }}
     >
       {pageNum}
-    </button>
+    </Button>
   );
 }

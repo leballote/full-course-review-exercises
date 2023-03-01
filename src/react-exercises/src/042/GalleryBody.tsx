@@ -1,5 +1,5 @@
+import { ImageList, ImageListItem } from "@mui/material";
 import React from "react";
-import styles from "./GalleryBody.module.css";
 
 type Image = {
   src: string;
@@ -16,27 +16,35 @@ type Props = {
 const GalleryBody = React.forwardRef<HTMLUListElement, Props>(
   ({ images, onScroll }, ref) => {
     return (
-      <ul
-        className={styles["gallery-body"]}
-        onScroll={onScroll}
-        style={{ backgroundColor: "aqua", overflowY: "scroll" }}
-        ref={ref}
-      >
+      <ImageList cols={4} onScroll={onScroll} ref={ref}>
         {images.map((image) => {
           return (
-            <li key={image.src}>
+            <ImageListItem
+              sx={{
+                "& picture": {
+                  height: "100%",
+                },
+                "& img": {
+                  objectFit: "cover",
+                },
+              }}
+              key={image.src}
+              cols={image.width >= 2 * image.height ? 2 : 1}
+              rows={image.height >= 2 * image.width ? 2 : 1}
+            >
               <picture>
                 <img
+                  loading="lazy"
                   src={image.src}
-                  width={image.width}
-                  height={image.height}
+                  width="100%"
+                  height="100%"
                   alt=""
                 />
               </picture>
-            </li>
+            </ImageListItem>
           );
         })}
-      </ul>
+      </ImageList>
     );
   }
 );

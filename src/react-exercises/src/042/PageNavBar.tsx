@@ -1,5 +1,5 @@
+import { Button, ButtonGroup } from "@mui/material";
 import PageButton from "./PageButton";
-import styles from "./PageNavBar.module.css";
 
 type Props = {
   pageIndex: number[];
@@ -22,22 +22,22 @@ export default function PageNavBar({
   onNextClick,
 }: Props) {
   return (
-    <nav className={styles["navbar"]}>
-      <button onClick={onPrevClick} disabled={isFirstPage}>
+    // <nav>
+    <ButtonGroup>
+      <Button onClick={onPrevClick} disabled={isFirstPage}>
         prev
-      </button>
-      <ul className={styles["index-buttons"]}>
+      </Button>
+      <ButtonGroup>
         {pageIndex.map((num) => {
           return (
-            <li key={num}>
-              <PageButton pageNum={num} onGoPageClick={onGoPageClick} />
-            </li>
+            <PageButton key={num} pageNum={num} onGoPageClick={onGoPageClick} />
           );
         })}
-      </ul>
-      <button onClick={onNextClick} disabled={isLastPage}>
+      </ButtonGroup>
+      <Button onClick={onNextClick} disabled={isLastPage}>
         next
-      </button>
-    </nav>
+      </Button>
+    </ButtonGroup>
+    // </nav>
   );
 }

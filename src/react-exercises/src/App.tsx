@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import LinearPlotFromSourceExample from "./041/LinearPlotFromSourceExample";
 import Gallery from "./042/Gallery";
+import "./App.css";
 
 function App() {
   const galleryRef = useRef<HTMLUListElement>(null);

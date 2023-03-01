@@ -15,12 +15,12 @@ type Galery = {
 
 function createImage(): Image {
   const width = faker.datatype.number({
-    min: 200,
-    max: 800,
+    min: 150,
+    max: 450,
   });
   const height = faker.datatype.number({
-    min: 200,
-    max: 800,
+    min: 150,
+    max: 450,
   });
   return {
     width,
