@@ -6,7 +6,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import GalleryBody from "./GalleryBody";
+import GalleryBody, { GalleryBodySxType } from "./GalleryBody";
 import PageButton from "./PageButton";
 import PageNavBar from "./PageNavBar";
 import isAtBottom from "./isAtBottom";
@@ -35,6 +35,7 @@ type Props = {
   ref?: React.RefObject<HTMLDivElement>;
   scrollerRef?: React.RefObject<HTMLElement>;
   galleryBodyRef?: React.RefObject<HTMLUListElement>;
+  galleryBodySx?: GalleryBodySxType;
 };
 
 //TODO: nextpage doesn't really need to be a state since it shouldn't trigger a re-render, maybe with the reference we are settled
@@ -45,6 +46,7 @@ export default function Gallery({
   ref,
   scrollerRef,
   galleryBodyRef,
+  galleryBodySx,
 }: Props = {}) {
   const hookRes = usePage({
     initialGalleryId,
@@ -108,7 +110,11 @@ export default function Gallery({
         isFirstPage={page.page === 1}
         isLastPage={page.page === page.total}
       />
-      <GalleryBody images={page.images} ref={galleryBodyRef} />
+      <GalleryBody
+        images={page.images}
+        ref={galleryBodyRef}
+        sx={galleryBodySx}
+      />
     </div>
   );
 }

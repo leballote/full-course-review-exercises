@@ -49,3 +49,8 @@
 *:after {
   box-sizing: inherit;
 }
+
+body {
+  overflow: scroll;
+  overflow-x: scroll;
+}

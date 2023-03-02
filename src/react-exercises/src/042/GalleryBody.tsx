@@ -7,16 +7,18 @@ type Image = {
   height: number;
 };
 
+export type GalleryBodySxType = React.ComponentProps<typeof ImageList>["sx"];
 type Props = {
   images: Image[];
   onScroll?: React.UIEventHandler<HTMLUListElement>;
   innerRef?: React.RefObject<HTMLUListElement>;
+  sx?: GalleryBodySxType;
 };
 
 const GalleryBody = React.forwardRef<HTMLUListElement, Props>(
-  ({ images, onScroll }, ref) => {
+  ({ images, onScroll, sx }, ref) => {
     return (
-      <ImageList cols={4} onScroll={onScroll} ref={ref}>
+      <ImageList cols={4} onScroll={onScroll} ref={ref} sx={sx}>
         {images.map((image) => {
           return (
             <ImageListItem
