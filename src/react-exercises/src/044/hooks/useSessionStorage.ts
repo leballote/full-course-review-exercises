@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 
-export default function useLocalStorage<T>(key: string, initialVal: T) {
+//local storage can only store strings
+
+export default function useSessionStorage<T>(key: string, initialVal: T) {
   const [val, setVal] = useState<T>(() => {
     try {
-      const storedValue = window.localStorage.getItem(key);
+      const storedValue = window.sessionStorage.getItem(key);
       if (storedValue) {
         return JSON.parse(storedValue);
       }
@@ -14,7 +16,7 @@ export default function useLocalStorage<T>(key: string, initialVal: T) {
   });
 
   useEffect(() => {
-    window.localStorage.setItem(key, JSON.stringify(val));
+    window.sessionStorage.setItem(key, JSON.stringify(val));
   }, [val]);
 
   return [val, setVal] as [typeof val, typeof setVal];

@@ -29,6 +29,7 @@ type NextPageData = {
 };
 
 type Props = {
+  baseURL: string;
   initialGalleryId?: string;
   initialPageParam?: string;
   initialCountParam?: string;
@@ -39,16 +40,20 @@ type Props = {
 };
 
 //TODO: nextpage doesn't really need to be a state since it shouldn't trigger a re-render, maybe with the reference we are settled
-export default function Gallery({
-  initialGalleryId = "1",
-  initialCountParam = "10",
-  initialPageParam = "1",
-  ref,
-  scrollerRef,
-  galleryBodyRef,
-  galleryBodySx,
-}: Props = {}) {
+export default function Gallery(
+  {
+    initialGalleryId = "1",
+    initialCountParam = "10",
+    initialPageParam = "1",
+    ref,
+    baseURL,
+    scrollerRef,
+    galleryBodyRef,
+    galleryBodySx,
+  }: Props = {} as any
+) {
   const hookRes = usePage({
+    baseURL,
     initialGalleryId,
     initialCountParam,
     initialPageParam,
@@ -97,7 +102,7 @@ export default function Gallery({
   }
 
   return (
-    <div ref={ref}>
+    <div ref={ref} data-testid="gallery">
       <PageNavBar
         pageIndex={pageIndex}
         onGoPageClick={(_, pageNum) => {
@@ -111,6 +116,7 @@ export default function Gallery({
         isLastPage={page.page === page.total}
       />
       <GalleryBody
+        page={String(page.page)}
         images={page.images}
         ref={galleryBodyRef}
         sx={galleryBodySx}
@@ -121,20 +127,18 @@ export default function Gallery({
 
 function usePage(
   {
-    initialGalleryId,
-    initialPageParam,
-    initialCountParam,
+    baseURL,
+    initialGalleryId = "1",
+    initialPageParam = "",
+    initialCountParam = "",
   }: {
+    baseURL: string;
     initialGalleryId: string;
     initialPageParam: string;
     initialCountParam: string;
-  } = {
-    initialGalleryId: "1",
-    initialCountParam: "",
-    initialPageParam: "",
-  }
+  } = {} as any
 ) {
-  const [galeryId, setGaleryId] = useState<string>(initialGalleryId);
+  const [gallereyId, setGallereyId] = useState<string>(initialGalleryId);
   const [pageParam, setPageParam, pageParamRef] =
     useStateRef<string>(initialPageParam);
   const [countParam, setCountParam] = useState<string>(initialCountParam);
@@ -150,8 +154,7 @@ function usePage(
     }
   }
 
-  const base = "http://localhost:3000";
-  const url = new URL(`galery/${galeryId}`, base);
+  const url = new URL(`gallerey/${gallereyId}`, baseURL);
 
   async function getImages() {
     if (
@@ -189,16 +192,16 @@ function usePage(
 
   useEffect(() => {
     getImages();
-  }, [galeryId, pageParam, countParam]);
+  }, [gallereyId, pageParam, countParam]);
 
   return {
-    galeryId,
+    gallereyId,
     pageParam,
     countParam,
     page,
     pageIndex,
     nextPageData,
-    setGaleryId,
+    setGallereyId,
     setPageParam,
     setCountParam,
     setPage,

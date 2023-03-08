@@ -24,17 +24,30 @@ export default function PageNavBar({
   return (
     // <nav>
     <ButtonGroup>
-      <Button onClick={onPrevClick} disabled={isFirstPage}>
+      <Button
+        onClick={onPrevClick}
+        disabled={isFirstPage}
+        data-testid="prevButton"
+      >
         prev
       </Button>
       <ButtonGroup>
         {pageIndex.map((num) => {
           return (
-            <PageButton key={num} pageNum={num} onGoPageClick={onGoPageClick} />
+            <PageButton
+              key={num}
+              pageNum={num}
+              onGoPageClick={onGoPageClick}
+              data-testid={`pageButton${num}`}
+            />
           );
         })}
       </ButtonGroup>
-      <Button onClick={onNextClick} disabled={isLastPage}>
+      <Button
+        onClick={onNextClick}
+        disabled={isLastPage}
+        data-testid="nextButton"
+      >
         next
       </Button>
     </ButtonGroup>

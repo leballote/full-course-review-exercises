@@ -8,7 +8,7 @@ type Image = {
   src: string;
 };
 
-type Galery = {
+type Gallerey = {
   id: string;
   images: Image[];
 };
@@ -37,7 +37,7 @@ function createImages(noImages: number): Image[] {
   return images;
 }
 
-function createGaleries(): Record<string, Galery> {
+function createGaleries(): Record<string, Gallerey> {
   const randomNoImages = () => faker.datatype.number({ min: 50, max: 300 });
   return {
     "1": {

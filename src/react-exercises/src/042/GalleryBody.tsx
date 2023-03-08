@@ -9,6 +9,7 @@ type Image = {
 
 export type GalleryBodySxType = React.ComponentProps<typeof ImageList>["sx"];
 type Props = {
+  page: string;
   images: Image[];
   onScroll?: React.UIEventHandler<HTMLUListElement>;
   innerRef?: React.RefObject<HTMLUListElement>;
@@ -16,9 +17,15 @@ type Props = {
 };
 
 const GalleryBody = React.forwardRef<HTMLUListElement, Props>(
-  ({ images, onScroll, sx }, ref) => {
+  ({ page, images, onScroll, sx }, ref) => {
     return (
-      <ImageList cols={4} onScroll={onScroll} ref={ref} sx={sx}>
+      <ImageList
+        cols={4}
+        onScroll={onScroll}
+        ref={ref}
+        sx={sx}
+        data-testid={"galleryBody"}
+      >
         {images.map((image) => {
           return (
             <ImageListItem
@@ -36,6 +43,7 @@ const GalleryBody = React.forwardRef<HTMLUListElement, Props>(
             >
               <picture>
                 <img
+                  data-page={page}
                   loading="lazy"
                   src={image.src}
                   width="100%"
