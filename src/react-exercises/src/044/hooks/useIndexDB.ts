@@ -21,67 +21,58 @@ export default function useIndexDB<T>(
   } = {} as any
 ) {
   const [val, setVal] = useState<T>(placeHolderValue ?? initialValue);
-  const dbRef = useRef<{ db: idb.IDBPDatabase | null }>({ db: null });
-  console.log("dbRef.current start", dbRef.current);
-  console.log("dbRed.current.db start", dbRef.current.db);
-  //@ts-expect-error
-  window.myRef = dbRef;
+  const [db, setDB] = useState<idb.IDBPDatabase | null>(null);
+  const [initiated, setInitiated] = useState<boolean>(false);
 
-  async function setValueFromIndexDB(
-    dbRef: React.RefObject<{ db: idb.IDBPDatabase | null }>
-  ) {
-    if (!dbRef.current) return;
-    dbRef.current.db = await idb.openDB(dbName, 1, {
+  async function init() {
+    //if db is already set it shoudln't do anything
+    if (db) return;
+    console.log("initing");
+    const _db = await idb.openDB(dbName, 1, {
       upgrade(db) {
-        db.createObjectStore(storeName);
+        if (!db.objectStoreNames.contains(storeName)) {
+          db.createObjectStore(storeName);
+        }
+        //here it should not sync values since after setting db, it will p
       },
     });
+    setDB(_db);
 
-    const db = dbRef.current.db;
     try {
-      if (!db.objectStoreNames.contains(storeName)) {
-        await dbRef.current.db.put(storeName, initialValue, key);
+      if ((await _db.get(storeName, key)) == undefined) {
+        await _db.put(storeName, initialValue, key);
         return initialValue;
       }
-      const valueFromDB = await db.get(storeName, key);
+      const valueFromDB = await _db.get(storeName, key);
       if (valueFromDB === undefined) return initialValue;
       setVal(valueFromDB);
+      setInitiated(true);
     } catch (e) {
+      console.log("here I should return");
       return initialValue;
     }
   }
 
-  async function closeDB(
-    dbRef: React.RefObject<{ db: idb.IDBPDatabase | null }>
-  ) {
-    if (dbRef.current?.db) {
-      dbRef.current.db.close();
-    }
-  }
-
-  async function syncValues(
-    newVal: T,
-    dbRef: React.RefObject<{ db: idb.IDBPDatabase | null }>
-  ) {
-    if (dbRef.current?.db) {
-      await dbRef.current.db.put(storeName, newVal, key);
+  async function syncValues(newVal: T, db: idb.IDBPDatabase | null) {
+    if (db) {
+      await db.put(storeName, newVal, key);
     }
   }
 
   useEffect(() => {
-    console.log("1", dbRef.current);
-    setValueFromIndexDB(dbRef);
-    return () => {
-      closeDB(dbRef);
-    };
-  }, [dbRef.current]);
+    init();
+  }, []);
 
   useEffect(() => {
-    console.log("2", dbRef.current.db);
-    if (dbRef.current) {
-      syncValues(val, dbRef);
+    console.log(val, db, initiated);
+    if (initiated) {
+      syncValues(val, db);
     }
-  }, [val, dbRef.current?.db]);
+  }, [val, db, initiated]);
 
-  return [val, setVal, dbRef] as [typeof val, typeof setVal, typeof dbRef];
+  return [val, setVal, initiated] as [
+    typeof val,
+    typeof setVal,
+    typeof initiated
+  ];
 }

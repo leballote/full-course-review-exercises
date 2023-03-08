@@ -8,6 +8,9 @@ import "./App.css";
 
 function ExampleHooks() {
   const [hey, setHey] = useIndexDB<any>("hey", { foo: "bar" });
+  // const [hey, setHey] = useIndexDB<any>("indexDB2", "state2", "hey", {
+  //   foo: "bar",
+  // });
 
   return (
     <div>
