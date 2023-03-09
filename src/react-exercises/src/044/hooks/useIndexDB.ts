@@ -1,11 +1,5 @@
 import * as idb from "idb";
-import { useEffect, useRef, useState } from "react";
-// {
-//   dbName: string = "useIndexDB",
-//   storeName: string = "state",
-//   placeHolderValue?: T
-// }
-//I don't know if the database should be scoped to component, but since useLocalStorage and useSession isn't I let it global.
+import { useEffect, useState } from "react";
 //also, since, opening the db is an asychronous operation, I don't see how to make the initial value the same as the one in the database
 export default function useIndexDB<T>(
   key: string,

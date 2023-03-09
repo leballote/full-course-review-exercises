@@ -3,8 +3,8 @@ import React from "react";
 
 type Image = {
   src: string;
-  width: number;
   height: number;
+  width: number;
 };
 
 export type GalleryBodySxType = React.ComponentProps<typeof ImageList>["sx"];
@@ -25,6 +25,7 @@ const GalleryBody = React.forwardRef<HTMLUListElement, Props>(
         ref={ref}
         sx={sx}
         data-testid={"galleryBody"}
+        rowHeight={200}
       >
         {images.map((image) => {
           return (
@@ -38,8 +39,8 @@ const GalleryBody = React.forwardRef<HTMLUListElement, Props>(
                 },
               }}
               key={image.src}
-              cols={image.width >= 2 * image.height ? 2 : 1}
-              rows={image.height >= 2 * image.width ? 2 : 1}
+              cols={image.height >= 2 * image.width ? 2 : 1}
+              rows={image.width >= 2 * image.height ? 2 : 1}
             >
               <picture>
                 <img

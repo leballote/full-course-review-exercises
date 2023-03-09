@@ -3,8 +3,7 @@ import PageButton from "./PageButton";
 
 type Props = {
   pageIndex: number[];
-  isFirstPage?: boolean;
-  isLastPage?: boolean;
+  currentIndex: number;
   onGoPageClick?: (
     ev: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     pageNum: number
@@ -13,14 +12,15 @@ type Props = {
   onNextClick?: (ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 };
 
-export default function PageNavBar({
+export default function PageNavbar({
   pageIndex,
-  isFirstPage = false,
-  isLastPage = false,
+  currentIndex,
   onGoPageClick,
   onPrevClick,
   onNextClick,
 }: Props) {
+  const isFirstPage = pageIndex[0] === currentIndex;
+  const isLastPage = pageIndex.at(-1) === currentIndex;
   return (
     // <nav>
     <ButtonGroup>

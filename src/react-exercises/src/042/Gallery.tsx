@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import GalleryBody, { GalleryBodySxType } from "./GalleryBody";
 import PageButton from "./PageButton";
-import PageNavBar from "./PageNavBar";
+import PageNavbar from "./PageNavbar";
 import isAtBottom from "./isAtBottom";
 
 //todo unify the types
@@ -103,7 +103,7 @@ export default function Gallery(
 
   return (
     <div ref={ref} data-testid="gallery">
-      <PageNavBar
+      <PageNavbar
         pageIndex={pageIndex}
         onGoPageClick={(_, pageNum) => {
           setPageParam(String(pageNum));
@@ -112,8 +112,7 @@ export default function Gallery(
           setPageParam((page) => String(Number(page) - 1));
         }}
         onNextClick={handleOnNextClick}
-        isFirstPage={page.page === 1}
-        isLastPage={page.page === page.total}
+        currentIndex={page.page}
       />
       <GalleryBody
         page={String(page.page)}
