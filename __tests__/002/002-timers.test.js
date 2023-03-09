@@ -12,8 +12,8 @@ beforeEach(() => {
   fetchMock.resetMocks();
 });
 
-describe("timers", () => {
-  test("with useIncrement", async () => {
+describe("Timer related tests", () => {
+  test("with useIncrement it should take more every retry", async () => {
     const urlQuery = (url) => jest.fn(() => fetch(url));
     const query = urlQuery("https://example.com");
     fetchMock.mockResponses(
@@ -36,7 +36,7 @@ describe("timers", () => {
     expect(query).toBeCalledTimes(4);
   });
 
-  test("without useIncrement", async () => {
+  test("without useIncrement it should take a constant amount of time for every retry", async () => {
     const urlQuery = (url) => jest.fn(() => fetch(url));
     const query = urlQuery("https://example.com");
     fetchMock.mockResponses(

@@ -5,8 +5,8 @@ beforeEach(() => {
   fetchMock.resetMocks();
 });
 
-describe("Number of tries", () => {
-  test.skip("Successful on the first try", async () => {
+describe("Number of tries related", () => {
+  test.skip("Successful on the first try should work as fetch", async () => {
     const returnValue = {
       data: {
         message: "hi",
@@ -23,7 +23,7 @@ describe("Number of tries", () => {
     expect(query).toBeCalledTimes(1);
   });
 
-  test("Sucessful after 3 tries", async () => {
+  test("It should resolve if the fetch reesponse is ok in less than the number of retries", async () => {
     const returnValue = {
       data: {
         message: "hi",
@@ -45,7 +45,7 @@ describe("Number of tries", () => {
     expect(query).toBeCalledTimes(3);
   });
 
-  test("It is missing one retry to get it", async () => {
+  test("It should fail if the fetch response is not ok within the number of retries", async () => {
     const returnValue = {
       data: {
         message: "hi",

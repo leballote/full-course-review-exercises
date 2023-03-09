@@ -72,11 +72,11 @@ describe("Cicle", () => {
   });
 });
 
-describe("Doesn't cicle", () => {
+describe("Doesn't cycle", () => {
   test("Null", () => {
     expect(findLoopStart(null)).toEqual(null);
   });
-  test("Generic", () => {
+  test("Generic list without cycle", () => {
     const list = connectNodesSequentially([N(1), N(2), N(5), null]);
     expect(findLoopStart(list)).toEqual(null);
   });

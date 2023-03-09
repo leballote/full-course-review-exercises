@@ -1,5 +1,5 @@
-import { execSync, spawnSync } from "child_process";
 import { findFirstNPrimes } from "../../src/023";
+//To Ivan: I was going to test the bar but I remembered you said that I should test only what I write and the library I used does the pinting on the terminal so I am only testing the prime numbers. If you think there is something else I can test let me know.
 
 describe("Find primes numbers", () => {
   describe("Regular cases", () => {
@@ -29,14 +29,3 @@ describe("Find primes numbers", () => {
     });
   });
 });
-
-// test("internal test", () => {
-//   const actualOutput = spawnSync("node", ["src/023/index.js 100"], {
-//     encoding: "utf8",
-//     stdio: [null, "pipe", "pipe"],
-//   })
-//     .toString()
-//     .trim();
-//   // const actualOutput = stdout.trim();
-//   console.log("actual output:\n", actualOutput);
-// });

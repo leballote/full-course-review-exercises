@@ -1,4 +1,3 @@
-import { createBinaryTreeNode as N } from "../../dist/utils/ds.utils";
 import printTree, { ParsingError } from "../../dist/010";
 
 const consoleSpy = jest.spyOn(console, "log");
@@ -30,7 +29,7 @@ describe("Should throw parsing error", () => {
   });
 });
 
-describe("Not erroring", () => {
+describe("Shouldn't throw", () => {
   beforeAll(() => {
     consoleSpy.mockReset();
   });

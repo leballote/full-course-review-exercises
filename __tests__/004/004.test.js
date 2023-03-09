@@ -24,24 +24,26 @@ describe("mergeArray should merge", () => {
     ]);
   });
 
-  test("repeated numbers1", () => {
-    const smallArray = [2, 2, 2, 2];
-    const largeArray = [1, 1, 1, 1, 1, 1, 1, 1].concat(
-      new Array(smallArray.length)
-    );
-    mergeArrays(largeArray, smallArray);
-    expect(largeArray).toEqual([1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2]);
-  });
+  describe("Should work even if there are repeated numbers", () => {
+    test("small array has bigger numbers", () => {
+      const smallArray = [2, 2, 2, 2];
+      const largeArray = [1, 1, 1, 1, 1, 1, 1, 1].concat(
+        new Array(smallArray.length)
+      );
+      mergeArrays(largeArray, smallArray);
+      expect(largeArray).toEqual([1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2]);
+    });
 
-  test("repeated numbers2", () => {
-    const smallArray = [1, 1, 1, 1, 1, 1, 1, 1];
-    const largeArray = [2, 2, 2, 2].concat(new Array(smallArray.length));
-    mergeArrays(largeArray, smallArray);
-    expect(largeArray).toEqual([1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2]);
+    test("large array has bigger numbers", () => {
+      const smallArray = [1, 1, 1, 1, 1, 1, 1, 1];
+      const largeArray = [2, 2, 2, 2].concat(new Array(smallArray.length));
+      mergeArrays(largeArray, smallArray);
+      expect(largeArray).toEqual([1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2]);
+    });
   });
 
   //I considered that you have exactly enough space, but I let this test to be activated just in case
-  test.skip("more space than necessary", () => {
+  test.skip("If more space than necessary you shouls only occupy the ocupied length of largeArray plus the length of smallArray", () => {
     const smallArray = [1, 3, 5, 7];
     const largeArray = [0, 2, 4, 6].concat(new Array(smallArray.length + 4));
     mergeArrays(largeArray, smallArray);
@@ -63,7 +65,7 @@ describe("mergeArray should merge", () => {
   });
 
   //again I considered exactly enough space, but I believe this is a sane behavior
-  test.skip("less space than necessary", () => {
+  test.skip("If there is less space than necessary it should give the first largeArray.length elements of the whole sorted array", () => {
     const smallArray = [1, 3, 5, 7];
     const largeArray = [0, 2, 4, 6].concat(new Array(smallArray.length - 2));
     mergeArrays(largeArray, smallArray);

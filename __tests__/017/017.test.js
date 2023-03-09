@@ -44,11 +44,6 @@ describe("Palindromes", () => {
     ]);
     expect(isLinkedListPalindrome(head)).toEqual(true);
   });
-
-  test("funny parentheses", () => {
-    const head = connectNodesSequentially([N("("), N(")"), N(")"), N("(")]);
-    expect(isLinkedListPalindrome(head)).toEqual(true);
-  });
 });
 
 describe("Not palindromes", () => {
@@ -70,8 +65,15 @@ describe("Not palindromes", () => {
     const head = connectNodesSequentially([N("a"), N("b"), N("a"), N("b")]);
     expect(isLinkedListPalindrome(head)).toEqual(false);
   });
-  test("generic example 3", () => {
-    const head = connectNodesSequentially([N("("), N(")"), N("("), N(")")]);
+  test("almost palindrome", () => {
+    const head = connectNodesSequentially([
+      N("a"),
+      N("b"),
+      N("c"),
+      N("C"),
+      N("b"),
+      N("a"),
+    ]);
     expect(isLinkedListPalindrome(head)).toEqual(false);
   });
 });

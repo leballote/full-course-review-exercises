@@ -67,6 +67,7 @@ serpinskiDrawButton.addEventListener("click", () => {
 });
 
 serpinskiInputColorPicker.addEventListener("change", (ev) => {
+  console.log("called");
   const stylesheet = document.styleSheets[0];
   let elementRules;
 
@@ -74,11 +75,11 @@ serpinskiInputColorPicker.addEventListener("change", (ev) => {
   for (let i = 0; i < stylesheet.cssRules.length; i++) {
     if (stylesheet.cssRules[i].selectorText === ".up-triangle") {
       elementRules = stylesheet.cssRules[i];
+      console.log(elementRules);
     }
   }
 
-  elementRules.style.setProperty("border-bottom-color", ev.currentTarget.value);
-  serpinskiDrawButton.click();
+  elementRules.style.setProperty("background-color", ev.currentTarget.value);
 });
 
 async function drawTriangle({ x, y, root }) {

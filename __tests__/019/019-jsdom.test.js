@@ -24,7 +24,7 @@ const dom = new JSDOM(html, {
 });
 global.window = dom.window;
 global.document = dom.window.document;
-test("Let's see what nodes are here", async () => {
+test("Delayed 'tests' should be rendered within the block they are called", async () => {
   const beforeB = ` <ul id="results">
       <li style="color: green;">Outside and before the test block</li>
       <li>

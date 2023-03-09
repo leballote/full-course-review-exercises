@@ -24,19 +24,63 @@ describe("Tests with server and page", () => {
     await page.goto("http://localhost:8080", { waitUntil: "networkidle0" });
   });
 
-  test("Testing pupeteer", async () => {
-    const screenshot = await page.screenshot();
-    expect(screenshot).toMatchImageSnapshot();
-  });
+  describe("Should match the reference image for different input values", () => {
+    // test("n = 1", async () => {
+    //   const page = await browser.newPage();
+    //   await page.goto("http://localhost:8080", { waitUntil: "networkidle0" });
+    //   const elementHandle = await page.$("#serpinski-triangle-container");
+    //   const screenshot = await elementHandle.screenshot("serpinski-1");
+    //   expect(screenshot).toMatchImageSnapshot({
+    //     customSnapshotIdentifier: "serpinski-1",
+    //     noColors: true,
+    //   });
+    // });
 
-  test("should match the reference image", async () => {
-    const page = await browser.newPage();
-    await page.goto("http://localhost:8080", { waitUntil: "networkidle0" });
-    const elementHandle = await page.$("#serpinski-triangle-container");
-    const screenshot = await elementHandle.screenshot("hola");
-    expect(screenshot).toMatchImageSnapshot({
-      customSnapshotIdentifier: "hola",
-      noColors: true,
+    test("n = 2", async () => {
+      const page = await browser.newPage();
+      page.on("console", (message) =>
+        console.log(
+          `${message.type().substr(0, 3).toUpperCase()} ${message.text()}`
+        )
+      );
+      await page.goto("http://localhost:8080", { waitUntil: "networkidle0" });
+      const elementHandle = await page.$("#serpinski-triangle-container");
+
+      await page.evaluate(() => {
+        const input = document.getElementById("serpinski-input-n-number");
+        const serpinskiContainer = document.getElementById(
+          "serpinski-triangle-container"
+        );
+        input.value = 3;
+        const event = new Event("change");
+        console.log("value", input.value);
+        input.dispatchEvent(event);
+        console.log("serpinskiContainer", serpinskiContainer.innerHTML);
+      });
+      await page.waitForTimeout(2000);
+      await page.evaluate(() => {
+        const serpinskiContainer = document.getElementById(
+          "serpinski-triangle-container"
+        );
+        console.log(serpinskiContainer.innerHTML);
+      });
+
+      const screenshot = await elementHandle.screenshot("");
+      expect(screenshot).toMatchImageSnapshot({
+        customSnapshotIdentifier: "serpinski-3",
+        noColors: true,
+      });
     });
+
+    // test("n = 3", async () => {
+    //   const page = await browser.newPage();
+    //   await page.goto("http://localhost:8080", { waitUntil: "networkidle0" });
+    //   const elementHandle = await page.$("#serpinski-triangle-container");
+    //   const screenshot = await elementHandle.screenshot("");
+    //   expect(screenshot).toMatchImageSnapshot({
+    //     customSnapshotIdentifier: "hola",
+    //     noColors: true,
+    //   });
+    // });
   });
 });

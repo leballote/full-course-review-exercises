@@ -22,21 +22,21 @@ describe("edge cases", () => {
   });
 });
 
-describe("generic cases", () => {
-  test("example 1", () => {
+describe("regular cases", () => {
+  test("generic case 1", () => {
     const input = [1, 2, 3, [4, 5, [6, [[7]], 8]], [9, 10]];
     expect(flattenArray(input)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   });
 
-  test("example 2", () => {
-    const input = [[[[[[[[0]]]]]]]];
-    expect(flattenArray(input)).toEqual([0]);
-  });
-
-  test("example 3", () => {
+  test("generic case 2", () => {
     const input = [30, [20], 10, [2], [4], 3, [3, [5]], [7, [8, [9], [10]]]];
     expect(flattenArray(input)).toEqual([
       30, 20, 10, 2, 4, 3, 3, 5, 7, 8, 9, 10,
     ]);
+  });
+
+  test("it should work for a deep nested array", () => {
+    const input = [[[[[[[[0]]]]]]]];
+    expect(flattenArray(input)).toEqual([0]);
   });
 });

@@ -13,8 +13,8 @@ test("it should fetch normally if not cancelled", async () => {
   expect(resultJson).toEqual({ foo: "bar" });
 });
 
-test("basic test", async () => {
-  //for some reason the mock is not working
+test("It should throw AbortError if the fetch is cancelled", async () => {
+  //for some reason the mock is not working, maybe is because it resolves instantly(?), anyway the mock is not really needed for this test
   fetchMock.dontMock();
 
   const t = async () => {
