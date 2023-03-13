@@ -1,4 +1,4 @@
 module.exports = {
   presets: [["@babel/preset-env"]],
-  ignore: ["src/034/", "src/041/", "src/042/"],
+  ignore: ["src/react-exercises/", "src/034/", "src/023/", "src/030/"],
 };
