@@ -6,8 +6,7 @@ export function isSymmetric(root) {
   const rightStack = [];
   leftStack.push(root.left);
   rightStack.push(root.right);
-  let safe = 10;
-  while (leftStack.length > 0 && rightStack.length > 0 && safe--) {
+  while (leftStack.length > 0 && rightStack.length > 0) {
     let currentLeft = leftStack.pop();
     let currentRight = rightStack.pop();
     if (

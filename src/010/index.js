@@ -45,7 +45,6 @@ export function parseTree(treeString) {
   return parseAux({ treeString }, 0)[0];
 }
 
-("(A,,)");
 //pass a container in order to not make multiple copies of the string
 function parseAux(treeStringContainer, l, kind = "root") {
   const c = treeStringContainer;

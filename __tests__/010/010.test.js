@@ -27,6 +27,11 @@ describe("Should throw parsing error", () => {
     const treeString = "(A,(B),(C),(D))";
     expect(() => printTree(treeString)).toThrow(ParsingError);
   });
+
+  test("More than one tree", () => {
+    const treeString = "(A,,)()";
+    expect(() => printTree(treeString)).toThrow(ParsingError);
+  });
 });
 
 describe("Shouldn't throw", () => {

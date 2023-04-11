@@ -1,14 +1,14 @@
 import { mergeArrays } from "../../dist/004";
 
 describe("mergeArray should merge", () => {
-  test("generic 1", () => {
+  test("Intercalated", () => {
     const largeArray = [1, 3, 5, 7, 9].concat(new Array(5));
     const smallArray = [0, 2, 4, 6, 8];
     mergeArrays(largeArray, smallArray);
     expect(largeArray).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
   });
 
-  test("generic 2", () => {
+  test("Medium sized arrays; random increasing sequences", () => {
     const smallArray = [
       3, 7, 9, 20, 23, 35, 41, 44, 50, 51, 58, 61, 67, 70, 74, 75, 85, 98, 103,
     ];

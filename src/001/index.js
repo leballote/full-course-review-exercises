@@ -8,7 +8,9 @@ export default async function runTasks(tasks, pool_size) {
     );
     return out;
   } else {
-    const tasks_ = tasks.map((task, index) => ({ value: task, index }));
+    const tasks_ = tasks
+      .reverse()
+      .map((task, index) => ({ value: task, index }));
     const res = await createNChannels(pool_size, tasks_);
     return res;
   }

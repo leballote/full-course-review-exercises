@@ -20,7 +20,7 @@ export async function queryRetry(
   let tryNo = 0;
 
   while (tryNo < maxRetry + 1) {
-    res = await query("yei");
+    res = await query();
     if (res.ok) {
       return res;
     }
@@ -30,13 +30,12 @@ export async function queryRetry(
     }
     tryNo++;
   }
-  const finalError = new MaxRetryExceededError("Max retry exceeded");
-  finalError.fetchResponse = res;
-  throw finalError;
+  throw new MaxRetryExceededError(res);
 }
 
 export class MaxRetryExceededError extends Error {
-  constructor(...args) {
+  constructor(fetchResponse, ...args) {
     super("Max retry exceeded", ...args);
+    this.fetchResponse = fetchResponse;
   }
 }

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { LinearPlot } from "./LinearPlot";
 import { eventChannel, END, runSaga, stdChannel } from "redux-saga";
-import { take, call, cancel } from "redux-saga/effects";
+import { take, call, cancel, takeEvery } from "redux-saga/effects";
 type Point = [number, number];
 
 type Props = {
@@ -33,6 +33,7 @@ export function LinearPlotFromSource({ intialValues = [], source }: Props) {
       const newValues = yield take(chan);
       setValues(newValues.slice(0, 100));
     }
+    //utilidad
   }
 
   useEffect(() => {
