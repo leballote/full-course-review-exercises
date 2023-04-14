@@ -71,8 +71,8 @@ test("The first render renders the images corresponding to the first page (page 
     const gallery = getByTestId(el.container, "gallery");
     return gallery;
   });
-  //TODO: there is a typo: gallerey should be gallerey; correct in the backend
-  const pageRaw = await fetch(`${baseURL}/gallerey/1?count=10&page=1`);
+  //TODO: there is a typo: gallery should be gallery; correct in the backend
+  const pageRaw = await fetch(`${baseURL}/gallery/1?count=10&page=1`);
   const pageJson = await pageRaw.json();
   //since images don't have ids I just see that the srcs are the same
   pageJson.images.forEach(
@@ -96,7 +96,7 @@ test("Clicking next button should render the next set of images", async () => {
     const page2 = document.querySelector(`[data-page="2"]`);
     expect(page2).toBeTruthy();
   });
-  const pageRaw = await fetch(`${baseURL}/gallerey/1?count=10&page=2`);
+  const pageRaw = await fetch(`${baseURL}/gallery/1?count=10&page=2`);
   const pageJson = await pageRaw.json();
   pageJson.images.forEach(
     (image: { width: number; height: number; src: string }) => {
@@ -119,7 +119,7 @@ test("Clicking in some page should render that page", async () => {
     const page5 = document.querySelector(`[data-page="5"]`);
     expect(page5).toBeTruthy();
   });
-  const pageRaw = await fetch(`${baseURL}/gallerey/1?count=10&page=5`);
+  const pageRaw = await fetch(`${baseURL}/gallery/1?count=10&page=5`);
   const pageJson = await pageRaw.json();
   pageJson.images.forEach(
     (image: { width: number; height: number; src: string }) => {
@@ -148,7 +148,7 @@ test("Clicking prev button should render the previous set of images", async () =
     const page4 = document.querySelector(`[data-page="4"]`);
     expect(page4).toBeTruthy();
   });
-  const pageRaw = await fetch(`${baseURL}/gallerey/1?count=10&page=4`);
+  const pageRaw = await fetch(`${baseURL}/gallery/1?count=10&page=4`);
   const pageJson = await pageRaw.json();
   pageJson.images.forEach(
     (image: { width: number; height: number; src: string }) => {
@@ -168,7 +168,7 @@ test("Clicking prev button should render the previous set of images", async () =
   });
   const galleryBody = getByTestId(el.container, "galleryBody");
   expect(fetchSpy.mock.calls).toEqual([
-    [`${baseURL}/gallerey/1?page=1&count=10`],
+    [`${baseURL}/gallery/1?page=1&count=10`],
   ]);
   galleryBody.scrollTop = galleryBody.scrollHeight;
   fireEvent.scroll(galleryBody);
@@ -176,6 +176,6 @@ test("Clicking prev button should render the previous set of images", async () =
     expect(fetchSpy.mock.calls.length).toBeGreaterThanOrEqual(2);
   });
   expect(fetchSpy.mock.calls.at(-1)).toEqual([
-    `${baseURL}/gallerey/1?page=2&count=10`,
+    `${baseURL}/gallery/1?page=2&count=10`,
   ]);
 });

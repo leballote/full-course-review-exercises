@@ -45,7 +45,7 @@ function createWork(
 ) {
   function eventCh() {
     function getValues() {
-      return store.getState().graphs[id].values;
+      return store.getState().graphs[id]?.values;
     }
     const inputEventChFn = (emitter: any) => {
       return inputFn(emitter, END, getValues);
@@ -54,6 +54,7 @@ function createWork(
   }
 
   return function* out() {
+    yield put(createGraph({ id, initialValues: [] }));
     //@ts-ignore
     const chan = yield call(eventCh);
     while (true) {
@@ -72,20 +73,3 @@ export function* plotsSaga() {
 export default function* watchPlotSagas() {
   yield fork(plotsSaga);
 }
-
-/*
-You can use workers.
-On createGraph you define a new worker
-and fork it
-something like the following:
-
-while (true) {
-  yield take("graph/create");
-  function* worker() {
-    ...
-  }
-  yield fork(worker, graphChannels[payload.id]);
-}
-
-
-*/

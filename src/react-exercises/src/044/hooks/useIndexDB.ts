@@ -7,14 +7,12 @@ export default function useIndexDB<T>(
   {
     dbName = "useIndexDB",
     storeName = "state",
-    placeHolderValue,
   }: {
     dbName?: string;
     storeName?: string;
-    placeHolderValue?: T;
   } = {} as any
 ) {
-  const [val, setVal] = useState<T>(placeHolderValue ?? initialValue);
+  const [val, setVal] = useState<T | undefined>(undefined);
   const [db, setDB] = useState<idb.IDBPDatabase | null>(null);
   const [initiated, setInitiated] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
@@ -64,7 +62,9 @@ export default function useIndexDB<T>(
   }, []);
 
   useEffect(() => {
-    syncValues(val, db);
+    if (val != undefined) {
+      syncValues(val, db);
+    }
   }, [val, db]);
 
   return [val, setVal, initiated, error] as [

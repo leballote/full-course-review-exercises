@@ -17,8 +17,8 @@ type Image = {
 
 app.use(cors());
 app.use(express.json());
-app.get("/gallerey/:gallereyId/", (req, res) => {
-  const { gallereyId } = req.params;
+app.get("/gallery/:galleryId/", (req, res) => {
+  const { galleryId } = req.params;
   const { count: countString, page: pageString } = req.query;
   const count: number = !Number.isNaN(parseInt(countString as string))
     ? parseInt(countString as string)
@@ -26,8 +26,8 @@ app.get("/gallerey/:gallereyId/", (req, res) => {
   const page: number = !Number.isNaN(parseInt(pageString as string))
     ? parseInt(pageString as string)
     : 1;
-  const gallerey = galeries[gallereyId];
-  const images = gallerey.images as Image[];
+  const gallery = galeries[galleryId];
+  const images = gallery.images as Image[];
   const noPages = Math.ceil(images.length / count);
   const [lower, upper] = [(page - 1) * count, (page - 1) * count + count];
   const pageImages = images.slice(lower, upper);

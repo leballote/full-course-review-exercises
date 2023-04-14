@@ -12,13 +12,10 @@ import { store } from "./app/store";
 
 function ExampleHooks() {
   const [hey, setHey] = useIndexDB<any>("hey", { foo: "bar" });
-  // const [hey, setHey] = useIndexDB<any>("indexDB2", "state2", "hey", {
-  //   foo: "bar",
-  // });
 
   return (
     <div>
-      <h1>{JSON.stringify(hey)}</h1>
+      {hey ? <h1>{JSON.stringify(hey)}</h1> : <h1>Loading...</h1>}
       <button
         onClick={() => {
           setHey({ foo: "baz" });
@@ -54,7 +51,6 @@ function ExampleGallery() {
   const galleryBodyRef = useRef<HTMLUListElement>(null);
   return (
     <Gallery
-      baseURL="http://localhost:3000"
       scrollerRef={galleryBodyRef}
       galleryBodyRef={galleryBodyRef}
       galleryBodySx={{ height: "600px" }}
