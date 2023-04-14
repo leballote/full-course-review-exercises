@@ -24,7 +24,7 @@ const GalleryBody = React.forwardRef<HTMLUListElement, Props>(
         onScroll={onScroll}
         ref={ref}
         sx={sx}
-        data-testid={"galleryBody"}
+        data-testid="galleryBody"
         rowHeight={200}
       >
         {images.map((image) => {

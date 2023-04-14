@@ -34,7 +34,8 @@ export function LinearPlot({ values }: Props) {
 
   return (
     <Line
-      // width="500px"
+      width="500px"
+      height="300px"
       options={{
         animation: false,
         maintainAspectRatio: false,

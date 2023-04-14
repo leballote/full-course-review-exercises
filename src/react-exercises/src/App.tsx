@@ -4,7 +4,11 @@ import Gallery from "./042/Gallery";
 import useIndexDB from "./044/hooks/useIndexDB";
 import useLocalStorage from "./044/hooks/useLocalStorage";
 import useSessionStorage from "./044/hooks/useSessionStorage";
-import "./App.css";
+// import "./App.css";
+import { Route, BrowserRouter, Routes, Link } from "react-router-dom";
+import SamplePage from "./041/SamplePage";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
 
 function ExampleHooks() {
   const [hey, setHey] = useIndexDB<any>("hey", { foo: "bar" });
@@ -58,14 +62,43 @@ function ExampleGallery() {
   );
 }
 
+function Main() {
+  return (
+    <div>
+      <h1>React exercises</h1>
+      <ul>
+        <li>
+          <Link to="041">041</Link>
+        </li>
+        <li>
+          <Link to="042">042</Link>
+        </li>
+        <li>
+          <Link to="044">044</Link>
+        </li>
+      </ul>
+    </div>
+  );
+}
+
 function App() {
-  type Posibility = "plot" | "gallery" | "hooks";
-  const toRender = "hooks" as Posibility;
+  // type Posibility = "plot" | "gallery" | "hooks";
+  // const toRender = "hooks" as Posibility;
   return (
     <>
-      {toRender == "gallery" ? <ExampleGallery /> : null}
-      {toRender == "plot" ? <ExamplePlot /> : null}
-      {toRender == "hooks" ? <ExampleHooks /> : null}
+      <Provider store={store}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="041" element={<SamplePage />} />
+            <Route path="042" element={<ExampleGallery />} />
+            <Route path="044" element={<ExampleHooks />} />
+          </Routes>
+          <div>
+            <Link to="/">back</Link>
+          </div>
+        </BrowserRouter>
+      </Provider>
     </>
   );
 }
