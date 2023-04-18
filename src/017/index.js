@@ -4,22 +4,18 @@ export function isLinkedListPalindrome(head) {
   if (head == null) return true;
   let middle = head;
   let aux = head;
-  let length = 1;
   const firstHalf = [];
-  while (aux?.next?.next != null) {
+  while (aux?.next) {
     firstHalf.push(middle.value);
-    middle = middle?.next;
-    aux = aux?.next?.next;
-    length += 2;
+    middle = middle.next;
+    aux = aux.next.next;
   }
-  firstHalf.push(middle.value);
-  length += aux?.next ? 1 : 0;
 
-  let current = middle;
-  let index = Math.floor(length / 2) - 1;
-  current = current.next;
+  let current = aux ? middle.next : middle;
 
-  while (current !== null) {
+  let index = firstHalf.length - 1;
+
+  while (current) {
     if (current.value !== firstHalf[index]) {
       return false;
     }

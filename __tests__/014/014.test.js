@@ -20,7 +20,7 @@ test("generic example", () => {
   expect(findGreatestRectangleArea(matrix)).toEqual(22);
 });
 
-test("generic example 3 (smaller)", () => {
+test("generic example 2 (smaller)", () => {
   const matrix = [
     [0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
     [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
@@ -43,4 +43,14 @@ test("fully floaded", () => {
   ];
 
   expect(findGreatestRectangleArea(matrix)).toEqual(40);
+});
+
+test("Small matrix", () => {
+  const matrix = [
+    [0, 1, 1, 0, 1],
+    [0, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1],
+    [0, 0, 1, 0, 0],
+  ];
+  expect(findGreatestRectangleArea(matrix)).toEqual(8);
 });

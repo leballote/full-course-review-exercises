@@ -41,92 +41,84 @@ export class ParsingError extends Error {
   }
 }
 
-export function parseTree(treeString) {
-  return parseAux({ treeString }, 0)[0];
-}
+// export function parseTree(treeString) {
+//   return parseAux({ treeString }, 0)[0];
+// }
 
 //pass a container in order to not make multiple copies of the string
-function parseAux(treeStringContainer, l, kind = "root") {
-  const c = treeStringContainer;
+function parseTree(treeString) {
+  let i = -1;
   const START = "(";
   const END = ")";
   const SEP = ",";
-
-  let i = l;
-  if (c.treeString[i] !== START) {
-    if (kind === "root" && c.treeString[i] !== undefined) {
-      throw new ParsingError(
-        `Expected end of string. Found ${c.treeString[i]}`
-      );
-    }
-    if (kind === "left" && c.treeString[i] !== SEP) {
-      throw new ParsingError(`Expected ${SEP}. Found ${c.treeString[i]}`);
-    }
-    if (kind === "right" && c.treeString[i] !== END) {
-      throw new ParsingError(`Expected ${END}. Found ${c.treeString[i]}`);
-    }
-    return [null, i];
+  if (treeString == "") {
+    return null;
   }
-  const node = { value: null, left: null, right: null };
-  //first segment you add everything before the comma
-  while (c.treeString[i] !== SEP && c.treeString[i] !== END) {
+
+  function parseNodeValue() {
+    let value = "";
+    while (treeString[i] != SEP && treeString[i] != END) {
+      if (treeString[i] == START || treeString[i] == undefined) {
+        throw new ParsingError(`Unexpected character ${treeString[i]} at ${i}`);
+      }
+      value += treeString[i];
+      i++;
+    }
+    return value;
+  }
+
+  function parseNode() {
+    const node = {
+      value: "",
+    };
+
     i++;
-    if (c.treeString[i] === START) {
-      throw new ParsingError(`Unexpected character: ${START}.`);
+    if (treeString[i] == SEP || treeString[i] == END) {
+      return null;
+    } else if (treeString[i] == START) {
+      i++;
+      node.value = parseNodeValue();
+    } else {
+      throw new ParsingError(`Unexpected character ${treeString[i]} at ${i}`);
     }
-    if (i >= c.treeString.length) {
-      throw new ParsingError("Unexpected end of string");
+
+    //s[i] can only be END or SEP
+    if (treeString[i] == END) {
+      i++;
+      return node;
     }
-  }
-  node.value = c.treeString.slice(l + 1, i);
-  if (c.treeString[i] === END) {
-    if (kind === "root" && c.treeString[i + 1] !== undefined) {
-      throw new ParsingError(`Expected end of string`);
+    //s[i] can only be SEP
+    node.left = parseNode();
+
+    //only SEP or END
+    // console.log("here", treeString[i], i);
+    if (treeString[i] == END) {
+      i++;
+      return node;
     }
-    if (
-      kind === "left" &&
-      c.treeString[i + 1] !== SEP &&
-      c.treeString[i + 1] !== END
-    ) {
-      throw new ParsingError(
-        `Expected ${SEP} or ${END}. Found ${c.treeString[i + 1]}`
-      );
+
+    // console.log("we start parsing node", treeString[i], i);
+    node.right = parseNode();
+    if (treeString[i] != END) {
+      throw new ParsingError(`Expected ${END}`);
     }
-    if (kind === "right" && c.treeString[i + 1] !== END) {
-      throw new ParsingError(`Expected ${END}. Found ${c.treeString[i + 1]}`);
-    }
-    return [node, i + 1];
+    i++;
+
+    return node;
   }
 
-  //If you reached this, treeString[i] is SEP
-  //second segment
-  i++;
-  //now we are inside the tree to parse
-  const [leftNode, newIndex1] = parseAux(c, i, "left");
-  i = newIndex1;
-  node.left = leftNode;
-  //we finished the parsing, we should have ended in a comma or in an end
-
-  if (c.treeString[i] !== SEP) {
-    if (c.treeString[i] === END) {
-      return [node, i + 1];
-    }
-    throw new ParsingError(
-      `Expected ${SEP} or ${END}. Found ${c.treeString[i]}`
-    );
+  const tree = parseNode();
+  if (treeString[i] !== undefined) {
+    throw new ParsingError(`Expected end of string`);
   }
-  i++;
-
-  //third segment
-  const [rightNode, newIndex2] = parseAux(c, i, "right");
-  node.right = rightNode;
-  i = newIndex2;
-
-  if (c.treeString[i] !== END) {
-    throw new ParsingError(
-      `Expected character ${END}. Found ${c.treeString[i]}`
-    );
-  }
-  i++;
-  return [node, i];
+  return tree;
 }
+
+// const treeString = "(A,(B,,))";
+// // console.log("treeString", treeString);
+
+// const tree = parseTree(treeString);
+
+// const util = require("util");
+
+// console.log(util.inspect(tree, { depth: null }));
